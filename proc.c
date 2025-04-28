@@ -594,7 +594,7 @@ int clone(void (*worker)(void *, void *), void *arg1, void *arg2, void *stack)
   if (copyout(New_Thread->pgdir, sp, HandCrafted_Stack, 3 * sizeof(uint)) == -1)
   {
     // copy failed - clean up and return an error code
-    kfree(New_Thread->kstack);
+    kfree(New_Thread->kstack); // free the thread's kernel stack
     New_Thread->kstack = 0;
     New_Thread->state = UNUSED;
     curproc->Thread_Num--;
@@ -630,25 +630,29 @@ int clone(void (*worker)(void *, void *), void *arg1, void *arg2, void *stack)
 // MODIFIED CODE ---------------------------------------------------------->
 int join(int Thread_id)
 {
-  struct proc *p, *curproc = myproc();
-  int Join_Thread_Exit = 0, jtid;
-  if (Thread_id == 0)
+  struct proc *p, *curproc = myproc(); // get the current process that called join()
+  // var `p` will be used to search through the process table to find the thread to wait for
+  int Join_Thread_Exit = 0, jtid; // Join_Thread_Exit is a flag- did we find the thread to join?
+  // jtid will store the thread ID when we find it
+  if (Thread_id == 0) // if thread ID is invalid
     return -1;
-  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) // loop through the process table
   {
-    if (p->tid == Thread_id && p->parent == curproc)
+    if (p->tid == Thread_id && p->parent == curproc) // find thread with matching thread ID and parent process
     {
-      Join_Thread_Exit = 1;
+      Join_Thread_Exit = 1; // set flag to true, we found the thread
       break;
     }
   }
   if (!Join_Thread_Exit || curproc->killed)
   {
-    // cprintf("Herere");
+    // if we didn't find the process or the current process was killed
     return -1;
   }
+
+  // acquire the process table lock to perform modifications
   acquire(&ptable.lock);
-  for (;;)
+  for (;;) // infinite loop until the thread finishes (becomes ZOMBIE or current process gets killed)
   {
     // thread is killed by some other thread in group
     // cprintf("I am waiting\n");
@@ -657,12 +661,12 @@ int join(int Thread_id)
       release(&ptable.lock);
       return -1;
     }
-    if (p->state == ZOMBIE)
+    if (p->state == ZOMBIE) // process has now finished
     {
-      // Found the thread
+      // cleanup the thread
       curproc->Thread_Num--;
       jtid = p->tid;
-      kfree(p->kstack);
+      kfree(p->kstack); // free the thread's kernel stack
       p->kstack = 0;
       p->pgdir = 0;
       p->pid = 0;
@@ -671,15 +675,16 @@ int join(int Thread_id)
       p->parent = 0;
       p->name[0] = 0;
       p->killed = 0;
-      p->state = UNUSED;
+      p->state = UNUSED; // mark as unused (other new processes/ threads can reuse it later)
       release(&ptable.lock);
-      // cprintf("Parent has  %d threads\n",curproc->Thread_Num);
+
+      // return the thread ID
       return jtid;
     }
 
+    // if the thread hasn't finished yet, we sleep!
     sleep(curproc, &ptable.lock);
   }
-  // curproc->Thread_Num--;
   return 0;
 }
 // MODIFIED CODE ---------------------------------------------------------->
@@ -724,18 +729,22 @@ void procdump(void)
 // MODIFIED CODE ---------------------------------------------------------->
 int requestresource(int Resource_ID)
 {
+  // placeholder function
   return -1;
 }
 int releaseresource(int Resource_ID)
 {
+  // placeholder function
   return -1;
 }
 int writeresource(int Resource_ID, void *buffer, int offset, int size)
 {
+  // placeholder function
   return -1;
 }
 int readresource(int Resource_ID, int offset, int size, void *buffer)
 {
+  // placeholder function
   return -1;
 }
 

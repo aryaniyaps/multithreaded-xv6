@@ -30,6 +30,7 @@ SYSCALL(sbrk)
 SYSCALL(sleep)
 SYSCALL(uptime)
 // MODIFIED CODE ---------------------------------------------------------->
+// this file is a low level assembly wrapper around system calls
 SYSCALL(clone)
 SYSCALL(join)
 SYSCALL(requestresource)
