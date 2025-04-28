@@ -120,13 +120,15 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+
+// MODIFIED CODE ---------------------------------------------------------->
 int clone(void (*)(void*,void*),void*,void*,void*);
 int join(int);
 int requestresource(int);
 int releaseresource(int);
 int writeresource(int,void*,int,int);
 int readresource(int,int,int,void*);
-//We will add clone & join syscall prototypes here
+// MODIFIED CODE ---------------------------------------------------------->
 
 
 // swtch.S

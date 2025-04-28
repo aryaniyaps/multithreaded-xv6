@@ -34,9 +34,9 @@ struct context {
 
 enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
-// ##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 enum nodetype {RESOURCE, PROCESS};
-// ##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 
 // Per-process state
 struct proc {
@@ -45,11 +45,13 @@ struct proc {
   char *kstack;                // Bottom of kernel stack for this process
   enum procstate state;        // Process state
   int pid;                     // Process ID
+  // MODIFIED CODE ---------------------------------------------------------->
   int tid;                     // Thread Id
   int thread_index;
   char* tstack;                // Thread stack
   int Is_Thread;               // if 0 --->Parent o.w child
   int Thread_Num;              // Keeping track of the number of threads of a process
+  // MODIFIED CODE ---------------------------------------------------------->
   struct proc *parent;         // Parent process
   struct trapframe *tf;        // Trap frame for current syscall
   struct context *context;     // swtch() here to run process
@@ -59,7 +61,7 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
 };
-// ##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 typedef struct resource
 {
   int resourceid;
@@ -67,7 +69,7 @@ typedef struct resource
   int acquired;
   void* startaddr;
 }Resource;
-// ##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 
 // Process memory is laid out contiguously, low addresses first:
 //   text

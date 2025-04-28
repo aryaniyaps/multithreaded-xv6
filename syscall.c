@@ -103,12 +103,14 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
+// MODIFIED CODE ---------------------------------------------------------->
 extern int sys_clone(void);
 extern int sys_join(void);
 extern int sys_requestresource(void);
 extern int sys_writeresource(void);
 extern int sys_readresource(void);
 extern int sys_releaseresource(void);
+// MODIFIED CODE ---------------------------------------------------------->
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
 [SYS_exit]    sys_exit,
@@ -131,12 +133,14 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
+// MODIFIED CODE ---------------------------------------------------------->
 [SYS_clone]   sys_clone,
 [SYS_join]    sys_join,
 [SYS_requestresource]    sys_requestresource,
 [SYS_writeresource]    sys_writeresource,
 [SYS_readresource]    sys_readresource,
 [SYS_releaseresource]    sys_releaseresource,
+// MODIFIED CODE ---------------------------------------------------------->
 };
 void
 syscall(void)

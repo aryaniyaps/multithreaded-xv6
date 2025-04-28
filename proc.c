@@ -12,26 +12,21 @@ struct {
   struct proc proc[NPROC];
 } ptable;
 
+// MODIFIED CODE ---------------------------------------------------------->
 typedef struct Node {
     int vertex;
     enum nodetype type;
     struct Node* next;
 } Node;
+
 struct {
   struct spinlock lock;
   Node* adjList[MAXTHREAD+NRESOURCE];
   int visited[MAXTHREAD+NRESOURCE];
   int recStack[MAXTHREAD+NRESOURCE];
 } Graph;
-//################ADD Your Implementation Here######################
 
-
-
-      //Graph creation and functions
-
-
-
-//##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 
 static struct proc *initproc;
 
@@ -132,10 +127,12 @@ found:
   p->context = (struct context*)sp;
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
+  // MODIFIED CODE ---------------------------------------------------------->
   p->Is_Thread=0;
   p->Thread_Num=0;
   p->tstack=0;
   p->tid=0;
+  // MODIFIED CODE ---------------------------------------------------------->
   return p;
 }
 
@@ -170,15 +167,6 @@ userinit(void)
   // run this process. the acquire forces the above
   // writes to be visible, and the lock is also needed
   // because the assignment might not be atomic.
-//################ADD Your Implementation Here######################
-
-
-
-      //Resource page handling and creation
-
-
-
-//##################################################################
   acquire(&ptable.lock);
 
   p->state = RUNNABLE;
@@ -279,9 +267,11 @@ exit(void)
   iput(curproc->cwd);
   end_op();
   curproc->cwd = 0;
+  // MODIFIED CODE ---------------------------------------------------------->
   if(curproc->tid == 0 && curproc->Thread_Num!=0) {
     panic("Parent cannot exit before its children");
   }
+  // MODIFIED CODE ---------------------------------------------------------->
   acquire(&ptable.lock);
 
   // Parent might be sleeping in wait().
@@ -530,6 +520,8 @@ kill(int pid)
   release(&ptable.lock);
   return -1;
 }
+
+// MODIFIED CODE ---------------------------------------------------------->
 int clone(void (*worker)(void*,void*),void* arg1,void* arg2,void* stack)
 {
   //int i, pid;
@@ -605,6 +597,9 @@ int clone(void (*worker)(void*,void*),void* arg1,void* arg2,void* stack)
   //cprintf("process running Clone has  %d threads\n",curproc->Thread_Num);  
   return New_Thread->tid;
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
+// MODIFIED CODE ---------------------------------------------------------->
 int join(int Thread_id)
 {
   struct proc  *p,*curproc=myproc();
@@ -653,6 +648,7 @@ int join(int Thread_id)
   //curproc->Thread_Num--;
   return 0;
 }
+// MODIFIED CODE ---------------------------------------------------------->
 
 //PAGEBREAK: 36
 // Print a process listing to console.  For debugging.
@@ -691,31 +687,22 @@ procdump(void)
   }
 }
 
+// MODIFIED CODE ---------------------------------------------------------->
 int requestresource(int Resource_ID)
 {
-//################ADD Your Implementation Here######################
-
-//##################################################################
 return -1;
 }
 int releaseresource(int Resource_ID)
 {
-  //################ADD Your Implementation Here######################
-
-//##################################################################
   return -1;
 }
 int writeresource(int Resource_ID,void* buffer,int offset, int size)
 {
-//################ADD Your Implementation Here######################
-
-//##################################################################
   return -1;
 }
 int readresource(int Resource_ID,int offset, int size,void* buffer)
 {
-//################ADD Your Implementation Here######################
-
-//##################################################################
   return -1;
 }
+
+// MODIFIED CODE ---------------------------------------------------------->

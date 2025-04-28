@@ -20,10 +20,11 @@
 #define SYS_link   19
 #define SYS_mkdir  20
 #define SYS_close  21
+// MODIFIED CODE ---------------------------------------------------------->
 #define SYS_clone  22
 #define SYS_join   23
 #define SYS_requestresource 24
 #define SYS_writeresource 25
 #define SYS_readresource 26
 #define SYS_releaseresource 27
-
+// MODIFIED CODE ---------------------------------------------------------->

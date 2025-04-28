@@ -1,5 +1,7 @@
 #define NPROC        64  // maximum number of processes
+// MODIFIED CODE ---------------------------------------------------------->
 #define MAXTHREAD    8   // maximum number of threads for a process
+// MODIFIED CODE ---------------------------------------------------------->
 #define KSTACKSIZE 4096  // size of per-process kernel stack
 #define NCPU          8  // maximum number of CPUs
 #define NOFILE       16  // open files per process
@@ -12,7 +14,7 @@
 #define LOGSIZE      (MAXOPBLOCKS*3)  // max data blocks in on-disk log
 #define NBUF         (MAXOPBLOCKS*3)  // size of disk block cache
 #define FSSIZE       1000  // size of file system in blocks
-// ##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 #define NRESOURCE    4
-// ##################################################################
+// MODIFIED CODE ---------------------------------------------------------->
 

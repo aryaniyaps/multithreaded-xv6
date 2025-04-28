@@ -29,9 +29,11 @@ SYSCALL(getpid)
 SYSCALL(sbrk)
 SYSCALL(sleep)
 SYSCALL(uptime)
+// MODIFIED CODE ---------------------------------------------------------->
 SYSCALL(clone)
 SYSCALL(join)
 SYSCALL(requestresource)
 SYSCALL(writeresource)
 SYSCALL(readresource)
 SYSCALL(releaseresource)
+// MODIFIED CODE ---------------------------------------------------------->

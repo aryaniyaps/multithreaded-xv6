@@ -4,6 +4,7 @@
 #include "user.h"
 #include "x86.h"
 
+// MODIFIED CODE ---------------------------------------------------------->
 void Lock_Init(Lock* mutex)
 {
   mutex->Is_Locked = 0;
@@ -49,6 +50,8 @@ int thread_join(int thread_id)
 {
   return join(thread_id);
 }
+
+// MODIFIED CODE ---------------------------------------------------------->
 
 char*
 strcpy(char *s, const char *t)

@@ -23,12 +23,14 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+// MODIFIED CODE ---------------------------------------------------------->
 int clone(void (*)(void*,void*),void*,void*,void*);
 int join(int);
 int requestresource(int);
 int writeresource(int,void*,int,int);
 int readresource(int,int,int,void*);
 int releaseresource(int);
+// MODIFIED CODE ---------------------------------------------------------->
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);
@@ -43,6 +45,7 @@ void* malloc(uint);
 void free(void*);
 int atoi(const char*);
 
+// MODIFIED CODE ---------------------------------------------------------->
 //Thread library
 int thread_create(void (*)(void*,void*),void*,void*);
 int thread_join(int thread_id);
@@ -60,3 +63,4 @@ typedef struct Lock
 void Lock_Init(Lock* mutex);
 void Lock_Acquire(Lock* mutex);
 void Lock_Release(Lock* mutex);
+// MODIFIED CODE ---------------------------------------------------------->

@@ -7,6 +7,7 @@
 #include "mmu.h"
 #include "proc.h"
 
+// MODIFIED CODE ---------------------------------------------------------->
 int sys_clone(void)
 {
 
@@ -43,6 +44,9 @@ int sys_clone(void)
   return clone(func,(void*)arg1,(void*)arg2,(void *)child_stack);
 
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
+// MODIFIED CODE ---------------------------------------------------------->
 int sys_requestresource(void)
 {
   int Resource_ID;
@@ -50,6 +54,9 @@ int sys_requestresource(void)
     return -1;  
   return requestresource(Resource_ID);  
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
+// MODIFIED CODE ---------------------------------------------------------->
 int sys_releaseresource(void)
 {
   int Resource_ID;
@@ -57,6 +64,9 @@ int sys_releaseresource(void)
     return -1;  
   return releaseresource(Resource_ID);  
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
+// MODIFIED CODE ---------------------------------------------------------->
 int sys_writeresource(void)
 {
   int Resource_ID;
@@ -73,6 +83,9 @@ int sys_writeresource(void)
     return -1;    
   return writeresource(Resource_ID,(void*)arg1,Start_Offset,size);       
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
+// MODIFIED CODE ---------------------------------------------------------->
 int sys_readresource(void)
 {
   int Resource_ID;
@@ -89,6 +102,9 @@ int sys_readresource(void)
     return -1;    
   return readresource(Resource_ID,Start_Offset,size,(void*)arg1);   
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
+// MODIFIED CODE ---------------------------------------------------------->
 int sys_join(void)
 {
   int Thread_id;
@@ -96,6 +112,8 @@ int sys_join(void)
     return -1;
   return join(Thread_id);  
 }
+// MODIFIED CODE ---------------------------------------------------------->
+
 int
 sys_fork(void)
 {
